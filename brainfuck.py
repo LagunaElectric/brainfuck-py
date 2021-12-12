@@ -76,7 +76,6 @@ def main(array_size: int, bf_prog: list[str], params: list[int]):
         exit()
 
     brackmap = build_brackmap(prog_store)
-    print(brackmap)
 
     params = params.reverse()
 
@@ -117,15 +116,9 @@ if __name__ == '__main__':
     args = sys.argv[1:3]
     args_to_pass = args[2:]
 
-    print(len(args))
-    print(args)
-
     if len(args) < 2:
         print("Must give 2+ args. line_count: int, array_size: int, inputs_count: int, filename: str, input1: int, input2: int, input3: int...")
         exit()
-
-    with open(args[1], 'r') as bf_file:
-        lines = bf_file.readlines()
 
     for i in range(len(args)):
         if i != 1:
@@ -143,7 +136,6 @@ if __name__ == '__main__':
             exit()
 
     array_size = int(args[0])
-    print(f"arr size before main is {array_size}")
     filename = args[1]
 
     main(array_size, filename, args_to_pass)
