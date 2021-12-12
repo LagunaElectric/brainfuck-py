@@ -35,11 +35,9 @@ class Pointer:
     def __init__(self, num: int, array_size: int):
         self.val = num
         self.array_size = array_size
-        print(f"Ptr Array Size is {self.array_size}")
 
     def inc(self) -> None:
         self.val += 1
-        print(f"Pntr inc, new value {self.val}")
         check_value(self.array_size, self.val)
 
     def dec(self) -> None:
@@ -47,8 +45,7 @@ class Pointer:
         check_value(self.array_size, self.val)
 
 
-def check_value(value: int, arr_size: int, is_pointer: bool = True) -> None:
-    print(f"Checking value, current array size is {arr_size}")
+def check_value(arr_size: int, value: int, is_pointer: bool = True) -> None:
     if is_pointer:
         if value < 0 or value > arr_size:
             print("POINTER OUT OF BOUNDS")
@@ -60,7 +57,6 @@ def check_value(value: int, arr_size: int, is_pointer: bool = True) -> None:
 
 
 def main(array_size: int, bf_prog: list[str], params: list[int]):
-    print(f"Array size is {array_size}")
     reg: list[int] = [0 for i in range(array_size)]
 
     ptr: Pointer = Pointer(0, array_size)
@@ -87,7 +83,7 @@ def main(array_size: int, bf_prog: list[str], params: list[int]):
     i = 0
     while i < len(prog_store):
         char = prog_store[i]
-        pdebug(f"Char: {char} | Pointer: {ptr.val} | Cell Value: {reg[ptr.val]} | i: {i}")
+        # pdebug(f"Char: {char} | Pointer: {ptr.val} | Cell Value: {reg[ptr.val]} | i: {i}")
 
         if char == ">":
             ptr.inc()
@@ -98,12 +94,10 @@ def main(array_size: int, bf_prog: list[str], params: list[int]):
 
         if char == ",":
             reg[ptr.val] = params.pop()
-            print(f"char = , arr_size {array_size}")
             check_value(array_size, reg[ptr.val], False)
 
         if char == "+":
             reg[ptr.val] += 1
-            print(f"char = + arr_size {array_size}")
             check_value(array_size, reg[ptr.val], False)
 
         if char == "-":
@@ -117,7 +111,6 @@ def main(array_size: int, bf_prog: list[str], params: list[int]):
             i = brackmap[i]
 
         i += 1
-        print(reg, char)
 
 
 if __name__ == '__main__':
@@ -150,6 +143,7 @@ if __name__ == '__main__':
             exit()
 
     array_size = int(args[0])
+    print(f"arr size before main is {array_size}")
     filename = args[1]
 
     main(array_size, filename, args_to_pass)
